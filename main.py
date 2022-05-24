@@ -4,9 +4,9 @@ from typing import Iterator
 import requests
 
 RUSSIAN_WORDS_TXT = (
-    'https://raw.githubusercontent.com'
-    '/danakt/russian-words/master/russian.txt')
-RUSSIAN_WORDS_PLACE = os.path.join(os.getcwd(), 'russian.txt')
+    'https://raw.githubusercontent.com/Harrix/'
+    'Russian-Nouns/main/dist/russian_nouns.txt')
+RUSSIAN_WORDS_PLACE = os.path.join(os.getcwd(), 'russian_nouns.txt')
 
 
 def main(pattern: str, excludes: str = '', another_place: str = ''):
@@ -43,10 +43,12 @@ def all_russian_words(length: int) -> Iterator:
     rows = None
     if not os.path.exists(RUSSIAN_WORDS_PLACE):
         response = requests.get(RUSSIAN_WORDS_TXT)
-        rows = response.content.decode('cp1251')
+        rows = response.text
 
         with open(RUSSIAN_WORDS_PLACE, 'w+') as f:
             f.write(rows)
+
+        rows = rows.split('\n')
 
     if rows is None:
         with open(RUSSIAN_WORDS_PLACE, 'r') as f:
@@ -61,7 +63,7 @@ def all_russian_words(length: int) -> Iterator:
 
 
 def self_test():
-    main('у***а', 'скринго', 'д')
+    main('у***а', 'щрк', 'ч')
 
 
 self_test()
