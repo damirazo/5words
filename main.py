@@ -63,7 +63,7 @@ def all_russian_words(length: int) -> Iterator:
 
 
 def self_test():
-    main('у***а', 'щрк', 'ч')
+    main('у***а', 'скринго', 'д')
 
 
 self_test()
